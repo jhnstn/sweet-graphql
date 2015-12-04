@@ -12,7 +12,7 @@ macro field {
 
     var fieldType = makeIdent(' new GraphQLNonNull(graphql.GraphQL' + unwrapSyntax(#{$type}) + ')', #{$mName});
     letstx $gqlType = [fieldType];
-    return #{ $key: { $[type]: $gqlType , description: $description }}
+    return #{ $key: { $[type]: $gqlType , description: $description}}
   }
 
   case { $mName $key $[:] $type! } =>
@@ -23,11 +23,11 @@ macro field {
     return #{ $key: { $[type]: $gqlType }}
   }
 
-  case { $mName $key $[:] [$type] , $description } =>
+  case { $mName $key $[:] [$type], $description } =>
   {
     var fieldType = makeIdent(' new GraphQLList(' + unwrapSyntax(#{$type}) + ')', #{$mName});
     letstx $gqlType = [fieldType];
-    return #{$key: {$[type]: $gqlType , description: $description }}
+    return #{$key: {$[type]: $gqlType , description:$description }}
   }
 
   case { $mName $key $[:] [$type] } =>
@@ -37,11 +37,11 @@ macro field {
     return #{$key: {$[type]: $gqlType}}
   }
 
-  case { $mName $key $[:] $type , $description } =>
+  case { $mName $key $[:] $type, $description } =>
   {
     var fieldType = makeIdent('GraphQL' + unwrapSyntax(#{$type}), #{$mName});
     letstx $gqlType = [fieldType];
-    return #{$key: {$[type]: graphql.$gqlType , description:$description }}
+    return #{$key: {$[type]: graphql.$gqlType , description:$description}}
   }
 
   case { $mName $key $[:] $type } =>
@@ -50,7 +50,6 @@ macro field {
     letstx $gqlType = [fieldType];
     return #{$key: {$[type]: graphql.$gqlType}}
   }
-
 }
 
 macro type {
